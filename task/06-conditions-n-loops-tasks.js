@@ -183,7 +183,7 @@ function isInsideCircle(circle, point) {
  *   'entente' => null
  */
 function findFirstSingleChar(str) {
-    throw new Error('Not implemented');
+    return str.split('').filter(item => str.lastIndexOf(item) == str.indexOf(item)) || 0;
 }
 
 
@@ -226,7 +226,7 @@ function getIntervalString(a, b, isStartIncluded, isEndIncluded) {
  * 'noon' => 'noon'
  */
 function reverseString(str) {
-    throw new Error('Not implemented');
+    return str.split('').reverse().join('');
 }
 
 
@@ -243,7 +243,7 @@ function reverseString(str) {
  *   34143 => 34143
  */
 function reverseInteger(num) {
-    throw new Error('Not implemented');
+    return num.toString().split('').reverse().join('');
 }
 
 
@@ -268,7 +268,12 @@ function reverseInteger(num) {
  *   4916123456789012 => false
  */
 function isCreditCardNumber(ccn) {
-    throw new Error('Not implemented');
+    return ccn.split('')
+    .reverse()
+    .map( (x) => parseInt(x) )
+    .map( (x,idx) => idx % 2 ? x * 2 : x )
+    .map( (x) => x > 9 ? (x % 10) + 1 : x )
+    .reduce( (accum, x) => accum += x ) % 10 === 0;
 }
 
 
@@ -287,7 +292,11 @@ function isCreditCardNumber(ccn) {
  *   165536 (1+6+5+5+3+6 = 26,  2+6 = 8) => 8
  */
 function getDigitalRoot(num) {
-    throw new Error('Not implemented');
+    while (num > 9) {
+        var a = num.toString().split('').map(i => parseInt(i)).reduce((a,b) => a + b);
+        num = a;
+      }
+      return num;
 }
 
 
@@ -313,8 +322,22 @@ function getDigitalRoot(num) {
  *   '{[(<{[]}>)]}' = true 
  */
 function isBracketsBalanced(str) {
-    throw new Error('Not implemented');
+    var stack = [];
+    var open = ['[', '(', '<', '{'];
+    var close = [']', ')', '>', '}'];
+
+    for (var i = 0; i < str.length; i++) {     
+        if (open.indexOf(str[i]) != -1) {
+            stack.push(str[i]);
+            continue
+        }
+        
+        if (open.indexOf(stack.pop()) != close.indexOf(str[i]))  return false;
+    }
+    
+    return !stack.length;
 }
+
 
 
 /**
@@ -373,7 +396,7 @@ function timespanToHumanString(startDate, endDate) {
  *    365, 10 => '365'
  */
 function toNaryString(num, n) {
-    throw new Error('Not implemented');
+    return num.toString(n);
 }
 
 
