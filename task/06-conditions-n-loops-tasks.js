@@ -73,7 +73,7 @@ function getFactorial(n) {
  *   -1,1  =>  0  ( = -1 + 0 + 1 )
  */
 function getSumBetweenNumbers(n1, n2) {
-    let acc = 0;
+    var acc = 0;
     for (i=n1; i<=n2; i++) {
         acc += i;
     }
@@ -268,7 +268,7 @@ function reverseInteger(num) {
  *   4916123456789012 => false
  */
 function isCreditCardNumber(ccn) {
-    return ccn.split('')
+    return ('' + ccn).split('')
     .reverse()
     .map( (x) => parseInt(x) )
     .map( (x,idx) => idx % 2 ? x * 2 : x )
